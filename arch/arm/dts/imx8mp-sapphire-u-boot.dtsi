@@ -1,0 +1,5 @@
+// SPDX-License-Identifier: GPL-2.0+
+/* Copyright 2026 Trackonomy Systems. */
+
+#include "imx8mp-edm-g-u-boot.dtsi"
+

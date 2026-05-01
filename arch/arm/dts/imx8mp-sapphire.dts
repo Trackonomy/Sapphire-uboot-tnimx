@@ -1,0 +1,97 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Copyright 2026 Trackonomy Systems.
+ *
+ * Sapphire carrier board for TechNexion EDM-G iMX8MP SOM.
+ * Inherits everything from imx8mp-edm-g.dts; only carrier-specific
+ * GPIO defaults and pinmux for the Sapphire baseboard live here.
+ */
+
+#include "imx8mp-edm-g.dts"
+
+/ {
+	model = "Trackonomy Sapphire iMX8MP";
+	compatible = "trk,sapphire-imx8mp", "fsl,imx8mp";
+};
+
+&gpio1 {
+	rgb3    { gpio-hog; gpios = <15 0>; output-low;  line-name = "rgb3"; };
+	gps_rst { gpio-hog; gpios = <8  1>; output-high; line-name = "gps_rst"; };
+	gps_on  { gpio-hog; gpios = <14 0>; output-low;  line-name = "gps_on"; };
+};
+
+&gpio3 {
+	lora_dio { gpio-hog; gpios = <20 0>; output-low; line-name = "lora_dio"; };
+	rfid_on  { gpio-hog; gpios = <25 0>; output-low; line-name = "rfid_on"; };
+};
+
+&gpio4 {
+	sensor_en   { gpio-hog; gpios = <0  0>; output-low;  line-name = "sensor_en"; };
+	keep_alive  { gpio-hog; gpios = <2  0>; output-low;  line-name = "keep_alive"; };
+	ftdi_reset  { gpio-hog; gpios = <3  1>; output-high; line-name = "ftdi_reset"; };
+	rgb1        { gpio-hog; gpios = <4  0>; output-low;  line-name = "rgb1"; };
+	rgb2        { gpio-hog; gpios = <5  0>; output-low;  line-name = "rgb2"; };
+	buzzer      { gpio-hog; gpios = <6  0>; output-low;  line-name = "buzzer"; };
+	rled        { gpio-hog; gpios = <7  0>; output-low;  line-name = "rled"; };
+	gled        { gpio-hog; gpios = <8  0>; output-low;  line-name = "gled"; };
+	lora_rst    { gpio-hog; gpios = <13 0>; output-low;  line-name = "lora_rst"; };
+	lora_pin    { gpio-hog; gpios = <15 0>; output-low;  line-name = "lora_pin"; };
+	hmi1        { gpio-hog; gpios = <16 0>; output-low;  line-name = "hmi1"; };
+	hmi2        { gpio-hog; gpios = <17 0>; output-low;  line-name = "hmi2"; };
+	rfid_power2 { gpio-hog; gpios = <27 0>; output-low;  line-name = "rfid_power2"; };
+	rfid_rst1   { gpio-hog; gpios = <30 0>; output-low;  line-name = "rfid_rst1"; };
+};
+
+&gpio5 {
+	rfid_rst2   { gpio-hog; gpios = <0 0>; output-low; line-name = "rfid_rst2"; };
+	rfid_power1 { gpio-hog; gpios = <1 0>; output-low; line-name = "rfid_power1"; };
+	hmi3        { gpio-hog; gpios = <5 0>; output-low; line-name = "hmi3"; };
+};
+
+&iomuxc {
+	/* Augment, do NOT replace, TN's pinctrl-0 = <&pinctrl_hog_1> */
+	pinctrl-0 = <&pinctrl_hog_1>, <&pinctrl_hog>;
+
+	pinctrl_hog: hoggrp {
+		fsl,pins = < 
+			MX8MP_IOMUXC_HDMI_DDC_SCL__HDMIMIX_HDMI_SCL    0x400001c2
+			MX8MP_IOMUXC_HDMI_DDC_SDA__HDMIMIX_HDMI_SDA    0x400001c2
+			MX8MP_IOMUXC_HDMI_HPD__HDMIMIX_HDMI_HPD        0x40000010
+			MX8MP_IOMUXC_HDMI_CEC__HDMIMIX_HDMI_CEC        0x40000010
+			MX8MP_IOMUXC_SAI1_TXD1__GPIO4_IO13             0x19
+			MX8MP_IOMUXC_SAI5_RXC__GPIO3_IO20              0x19
+			MX8MP_IOMUXC_SAI1_TXD4__GPIO4_IO16             0x19
+			MX8MP_IOMUXC_SAI1_RXD2__GPIO4_IO04             0x19
+			MX8MP_IOMUXC_SAI1_TXD5__GPIO4_IO17             0x19
+			MX8MP_IOMUXC_SAI1_RXD3__GPIO4_IO05             0x19
+			MX8MP_IOMUXC_GPIO1_IO06__GPIO1_IO06            0x19
+			MX8MP_IOMUXC_GPIO1_IO15__GPIO1_IO15            0x19
+			MX8MP_IOMUXC_GPIO1_IO08__GPIO1_IO08            0x19
+			MX8MP_IOMUXC_GPIO1_IO07__GPIO1_IO07            0x19
+			MX8MP_IOMUXC_GPIO1_IO14__GPIO1_IO14            0x19
+			MX8MP_IOMUXC_SAI2_RXFS__GPIO4_IO21             0x19
+			MX8MP_IOMUXC_GPIO1_IO13__GPIO1_IO13            0x19
+			MX8MP_IOMUXC_GPIO1_IO01__GPIO1_IO01            0x19
+			MX8MP_IOMUXC_SAI5_RXD3__GPIO3_IO24             0x19
+			MX8MP_IOMUXC_SAI5_MCLK__GPIO3_IO25             0x19
+			MX8MP_IOMUXC_SAI3_RXD__GPIO4_IO30              0x19
+			MX8MP_IOMUXC_SAI3_TXFS__GPIO4_IO31             0x19
+			MX8MP_IOMUXC_SAI3_TXD__GPIO5_IO01              0x19
+			MX8MP_IOMUXC_SAI3_TXC__GPIO5_IO00              0x19
+			MX8MP_IOMUXC_SAI3_MCLK__GPIO5_IO02             0x19
+			MX8MP_IOMUXC_SAI2_MCLK__GPIO4_IO27             0x19
+			MX8MP_IOMUXC_GPIO1_IO10__GPIO1_IO10            0x19
+			MX8MP_IOMUXC_SAI1_RXD0__GPIO4_IO02             0x19
+			MX8MP_IOMUXC_SAI1_RXD1__GPIO4_IO03             0x19
+			MX8MP_IOMUXC_SAI1_TXFS__GPIO4_IO10             0x19
+			MX8MP_IOMUXC_SAI1_TXC__GPIO4_IO11              0x19
+			MX8MP_IOMUXC_SAI1_RXD4__GPIO4_IO06             0x19
+			MX8MP_IOMUXC_SAI1_RXD5__GPIO4_IO07             0x19
+			MX8MP_IOMUXC_SAI1_RXD6__GPIO4_IO08             0x19
+			MX8MP_IOMUXC_SAI1_RXD7__GPIO4_IO09             0x19
+			MX8MP_IOMUXC_SPDIF_EXT_CLK__GPIO5_IO05         0x19
+			MX8MP_IOMUXC_SAI1_RXFS__GPIO4_IO00             0x19
+		>;
+	};
+};
+

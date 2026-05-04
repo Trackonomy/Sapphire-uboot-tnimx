@@ -1,0 +1,14 @@
+if TARGET_SAPPHIRE_IMX8MP
+
+config SYS_BOARD
+	default "edm-g-imx8mp"
+
+config SYS_VENDOR
+	default "technexion"
+
+config SYS_CONFIG_NAME
+	default "sapphire-imx8mp"
+
+source "board/technexion/common/Kconfig"
+
+endif
